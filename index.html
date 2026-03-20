@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Page</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="background-gradient"></div>
+    
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header">
+            <h1 class="title">Download Page</h1>
+            <p class="subtitle">Get the latest version of our application</p>
+        </header>
+
+        <!-- Description Section -->
+        <section class="description-section">
+            <div class="description-card">
+                <h2>About This Download</h2>
+                <p>This is the latest version of our powerful application designed to enhance your productivity. 
+                   It's fully optimized, secure, and ready to use on your preferred platform. Download now and 
+                   experience the best performance.</p>
+            </div>
+        </section>
+
+        <!-- Download Options Section -->
+        <section class="download-section">
+            <h2 class="section-title">Choose Your Platform</h2>
+            
+            <div class="download-options">
+                <!-- Android Download -->
+                <div class="download-card">
+                    <div class="platform-icon android-icon">
+                        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M7 18c-1-1-1-4-1-4s0-3 1-4"></path>
+                            <path d="M17 18c1-1 1-4 1-4s0-3-1-4"></path>
+                            <path d="M6 13h12M12 5v3m-5 1h2m6 0h2"></path>
+                            <rect x="8" y="5" width="8" height="10" rx="1"></rect>
+                        </svg>
+                    </div>
+                    <h3>Android</h3>
+                    <p class="platform-version">Version 2.5.0</p>
+                    <div class="file-details">
+                        <span class="file-name">HydroGuardian.apk</span>
+                        <span class="file-size">Size auto-detected</span>
+                    </div>
+                    <button class="download-btn" data-platform="android" data-filename="HydroGuardian.apk" data-size="Auto" data-url="https://github.com/johngitgud/HydroGuardian/releases/latest/download/HydroGuardian.apk" data-fallback-url="./HydroGuardian.apk">
+                        <span class="btn-icon">⬇</span>
+                        <span class="btn-text">Download</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Progress Section -->
+        <section class="progress-section" id="progressSection" style="display: none;">
+            <div class="progress-container">
+                <h3>Downloading <span id="downloadingFile"></span></h3>
+                
+                <!-- Loading Animation -->
+                <div class="loading-animation">
+                    <div class="spinner"></div>
+                    <p id="loadingText">Preparing download...</p>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="progress-bar-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <div class="progress-info">
+                        <span id="progressPercent">0%</span>
+                        <span id="progressSpeed">0 KB/s</span>
+                    </div>
+                </div>
+
+                <!-- File Details During Download -->
+                <div class="download-details">
+                    <div class="detail-item">
+                        <span class="detail-label">File:</span>
+                        <span class="detail-value" id="detailFile"></span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Size:</span>
+                        <span class="detail-value" id="detailSize"></span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Status:</span>
+                        <span class="detail-value" id="detailStatus">In Progress...</span>
+                    </div>
+                </div>
+
+                <!-- Cancel Button -->
+                <button class="cancel-btn" id="cancelBtn">Cancel Download</button>
+            </div>
+        </section>
+
+        <!-- Success Message Section -->
+        <section class="message-section" id="successSection" style="display: none;">
+            <div class="success-message">
+                <div class="success-icon">✓</div>
+                <h3>Download Completed!</h3>
+                <p id="successText"></p>
+                <button class="reset-btn" id="resetBtn">Download Another</button>
+            </div>
+        </section>
+
+        <!-- Error Message Section -->
+        <section class="message-section" id="errorSection" style="display: none;">
+            <div class="error-message">
+                <div class="error-icon">✕</div>
+                <h3>Download Failed</h3>
+                <p id="errorText">An error occurred during download. Please try again.</p>
+                <button class="retry-btn" id="retryBtn">Retry Download</button>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features-section">
+            <h2 class="section-title">Why Choose Us</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h4>Lightning Fast</h4>
+                    <p>Download at maximum speed with optimized servers</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h4>Secure</h4>
+                    <p>All downloads are encrypted and virus-free</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h4>Android-Ready</h4>
+                    <p>Optimized for Android devices</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h4>Easy Installation</h4>
+                    <p>Simple setup in just a few clicks</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2026 Download Center. All rights reserved.</p>
+    </footer>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
