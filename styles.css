@@ -16,15 +16,46 @@
     --text-secondary: #64748b;
     --border-color: #e2e8f0;
     --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    --shadow-soft: 0 10px 26px rgba(15, 23, 42, 0.08), 0 2px 8px rgba(15, 23, 42, 0.06);
+    --shadow-strong: 0 24px 60px rgba(15, 23, 42, 0.22), 0 10px 24px rgba(15, 23, 42, 0.14);
+    --shadow-glow: 0 0 0 1px rgba(99, 102, 241, 0.16), 0 12px 32px rgba(99, 102, 241, 0.28);
     --transition: all 0.3s ease;
 }
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: var(--text-primary);
-    background-color: var(--bg-light);
+    background-color: #f4f7ff;
     line-height: 1.6;
     overflow-x: hidden;
+    position: relative;
+}
+
+body::before,
+body::after {
+    content: "";
+    position: fixed;
+    width: 42vmax;
+    height: 42vmax;
+    border-radius: 50%;
+    filter: blur(60px);
+    pointer-events: none;
+    z-index: -3;
+    opacity: 0.28;
+}
+
+body::before {
+    top: -12vmax;
+    left: -10vmax;
+    background: radial-gradient(circle at 30% 30%, #68d2ff 0%, #4f46e5 45%, transparent 70%);
+    animation: floatBlobA 16s ease-in-out infinite alternate;
+}
+
+body::after {
+    right: -14vmax;
+    bottom: -16vmax;
+    background: radial-gradient(circle at 35% 35%, #34d399 0%, #0891b2 42%, transparent 72%);
+    animation: floatBlobB 18s ease-in-out infinite alternate;
 }
 
 .background-gradient {
@@ -33,16 +64,48 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    opacity: 0.05;
+    background:
+        radial-gradient(1200px 700px at 8% 12%, rgba(99, 102, 241, 0.24) 0%, rgba(99, 102, 241, 0) 58%),
+        radial-gradient(900px 500px at 88% 6%, rgba(6, 182, 212, 0.18) 0%, rgba(6, 182, 212, 0) 62%),
+        linear-gradient(165deg, #eef3ff 0%, #f7fbff 48%, #eefaf6 100%);
+    opacity: 1;
     pointer-events: none;
-    z-index: -1;
+    z-index: -2;
+}
+
+.background-gradient::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(30, 41, 59, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(30, 41, 59, 0.045) 1px, transparent 1px);
+    background-size: 36px 36px;
+    mask-image: radial-gradient(circle at center, black 38%, transparent 100%);
+    opacity: 0.35;
+}
+
+.background-gradient::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(5, 12, 26, 0.32), rgba(5, 12, 26, 0.32)),
+        url("./beyond the other side.gif");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0.6;
+    mix-blend-mode: normal;
+    animation: bgPan 24s ease-in-out infinite alternate;
 }
 
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 40px 20px;
+    position: relative;
+    z-index: 1;
 }
 
 /* Header Section */
@@ -50,22 +113,56 @@ body {
     text-align: center;
     margin-bottom: 60px;
     animation: slideDown 0.6s ease-out;
+    position: relative;
+    padding: 28px 18px;
+}
+
+.header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.34), rgba(255, 255, 255, 0.08));
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(7px);
+    -webkit-backdrop-filter: blur(7px);
+    z-index: -1;
 }
 
 .title {
-    font-size: 3.5rem;
-    font-weight: 700;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    font-size: 4rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    background: linear-gradient(130deg, #4f46e5 0%, #2563eb 36%, #0ea5e9 68%, #14b8a6 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     margin-bottom: 10px;
+    text-shadow: 0 10px 30px rgba(37, 99, 235, 0.28), 0 2px 0 rgba(255, 255, 255, 0.35);
+    filter: drop-shadow(0 8px 16px rgba(15, 23, 42, 0.18));
+    position: relative;
 }
 
 .subtitle {
-    font-size: 1.3rem;
-    color: var(--text-secondary);
-    font-weight: 300;
+    font-size: 1.25rem;
+    color: #1e3a8a;
+    font-weight: 600;
+    letter-spacing: 0.015em;
+    text-shadow: 0 2px 10px rgba(255, 255, 255, 0.65);
+    opacity: 0.92;
+}
+
+.subtitle::before,
+.subtitle::after {
+    content: "";
+    display: inline-block;
+    width: 52px;
+    height: 2px;
+    margin: 0 12px;
+    vertical-align: middle;
+    background: linear-gradient(90deg, rgba(30, 58, 138, 0), rgba(30, 58, 138, 0.7), rgba(20, 184, 166, 0));
 }
 
 /* Description Section */
@@ -77,8 +174,8 @@ body {
     background: white;
     padding: 40px;
     border-radius: 16px;
-    box-shadow: var(--shadow);
-    border-left: 4px solid var(--primary-color);
+    box-shadow: var(--shadow-soft);
+    border: 1px solid rgba(148, 163, 184, 0.2);
     animation: fadeIn 0.6s ease-out 0.1s backwards;
 }
 
@@ -96,11 +193,22 @@ body {
 
 /* Section Title */
 .section-title {
+    display: block;
+    width: fit-content;
+    margin: 0 auto 40px;
+    padding: 7px 16px;
     text-align: center;
-    font-size: 2.2rem;
-    color: var(--text-primary);
-    margin-bottom: 40px;
+    font-size: 1.75rem;
+    color: #f8fafc;
     font-weight: 700;
+    letter-spacing: 0.01em;
+    background: rgba(15, 23, 42, 0.58);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 999px;
+    text-shadow: 0 2px 10px rgba(15, 23, 42, 0.7);
+    box-shadow: 0 8px 20px rgba(2, 6, 23, 0.24);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
 }
 
 /* Download Section */
@@ -120,21 +228,20 @@ body {
     border-radius: 16px;
     padding: 30px;
     text-align: center;
-    box-shadow: var(--shadow);
+    box-shadow: var(--shadow-soft);
     transition: var(--transition);
-    border: 2px solid transparent;
+    border: none;
     animation: fadeIn 0.6s ease-out 0.2s backwards;
 }
 
 .download-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-    border-color: var(--primary-color);
+    box-shadow: var(--shadow-strong);
 }
 
 .platform-icon {
-    width: 80px;
-    height: 80px;
+    width: 140px;
+    height: 140px;
     margin: 0 auto 20px;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     border-radius: 16px;
@@ -150,7 +257,16 @@ body {
 }
 
 .android-icon {
-    background: linear-gradient(135deg, #3ddc84 0%, #3ddc84 100%);
+    background: transparent;
+    box-shadow: none;
+}
+
+.platform-logo {
+    width: 128px;
+    height: 128px;
+    object-fit: contain;
+    border-radius: 12px;
+    display: block;
 }
 
 .download-card h3 {
@@ -202,12 +318,12 @@ body {
     align-items: center;
     justify-content: center;
     gap: 8px;
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    box-shadow: var(--shadow-glow);
 }
 
 .download-btn:hover {
     transform: scale(1.02);
-    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+    box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.22), 0 16px 40px rgba(99, 102, 241, 0.38);
 }
 
 .download-btn:active {
@@ -229,7 +345,7 @@ body {
     background: white;
     border-radius: 16px;
     padding: 40px;
-    box-shadow: var(--shadow);
+    box-shadow: var(--shadow-strong);
     animation: slideUp 0.4s ease-out;
 }
 
@@ -359,7 +475,7 @@ body {
     background: white;
     border-radius: 16px;
     padding: 50px 40px;
-    box-shadow: var(--shadow);
+    box-shadow: var(--shadow-strong);
     animation: slideUp 0.4s ease-out;
     max-width: 600px;
     margin: 40px auto;
@@ -435,14 +551,14 @@ body {
     padding: 30px;
     border-radius: 16px;
     text-align: center;
-    box-shadow: var(--shadow);
+    box-shadow: var(--shadow-soft);
     transition: var(--transition);
     animation: fadeIn 0.6s ease-out 0.3s backwards;
 }
 
 .feature-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    box-shadow: var(--shadow-strong);
 }
 
 .feature-icon {
@@ -465,9 +581,19 @@ body {
 .footer {
     text-align: center;
     padding: 30px;
-    color: var(--text-secondary);
-    border-top: 1px solid var(--border-color);
+    color: #0f172a;
+    border-top: 1px solid rgba(15, 23, 42, 0.22);
+    background: rgba(255, 255, 255, 0.62);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
     margin-top: 60px;
+    position: relative;
+    z-index: 2;
+}
+
+.footer p {
+    font-weight: 600;
 }
 
 /* Animations */
@@ -513,18 +639,72 @@ body {
     }
 }
 
+@keyframes floatBlobA {
+    from {
+        transform: translate(0, 0) scale(1);
+    }
+    to {
+        transform: translate(3vmax, 2vmax) scale(1.12);
+    }
+}
+
+@keyframes floatBlobB {
+    from {
+        transform: translate(0, 0) scale(1);
+    }
+    to {
+        transform: translate(-4vmax, -2vmax) scale(1.1);
+    }
+}
+
+@keyframes bgPan {
+    from {
+        transform: scale(1) translate3d(0, 0, 0);
+    }
+    to {
+        transform: scale(1.06) translate3d(-1.2%, -1.2%, 0);
+    }
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
+    body::before,
+    body::after {
+        width: 54vmax;
+        height: 54vmax;
+        opacity: 0.2;
+    }
+
+    .background-gradient::before {
+        opacity: 0.2;
+        background-size: 30px 30px;
+    }
+
+    .background-gradient::after {
+        opacity: 0.34;
+    }
+
+    .header {
+        padding: 24px 14px;
+    }
+
     .title {
-        font-size: 2.5rem;
+        font-size: 2.8rem;
     }
 
     .subtitle {
-        font-size: 1.1rem;
+        font-size: 1.05rem;
+    }
+
+    .subtitle::before,
+    .subtitle::after {
+        width: 34px;
+        margin: 0 8px;
     }
 
     .section-title {
-        font-size: 1.8rem;
+        font-size: 1.45rem;
+        padding: 7px 14px;
     }
 
     .description-card {
@@ -567,16 +747,43 @@ body {
 }
 
 @media (max-width: 480px) {
+    body::before,
+    body::after {
+        animation: none;
+        filter: blur(40px);
+        opacity: 0.16;
+    }
+
+    .background-gradient::before {
+        opacity: 0.14;
+        background-size: 26px 26px;
+    }
+
+    .background-gradient::after {
+        opacity: 0.28;
+        animation: none;
+    }
+
+    .header {
+        padding: 18px 10px;
+    }
+
     .title {
-        font-size: 1.8rem;
+        font-size: 2.1rem;
     }
 
     .subtitle {
-        font-size: 0.95rem;
+        font-size: 0.92rem;
+    }
+
+    .subtitle::before,
+    .subtitle::after {
+        display: none;
     }
 
     .section-title {
-        font-size: 1.4rem;
+        font-size: 1.2rem;
+        padding: 6px 12px;
     }
 
     .download-card {
@@ -584,8 +791,13 @@ body {
     }
 
     .platform-icon {
-        width: 60px;
-        height: 60px;
+        width: 90px;
+        height: 90px;
+    }
+
+    .platform-logo {
+        width: 78px;
+        height: 78px;
     }
 
     .download-card h3 {
@@ -626,4 +838,12 @@ button:focus {
 a:focus {
     outline: 2px solid var(--primary-color);
     outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .background-gradient::after,
+    body::before,
+    body::after {
+        animation: none;
+    }
 }
